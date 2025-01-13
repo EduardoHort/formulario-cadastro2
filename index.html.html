@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro para Contato</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background: #000000;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #8a8888;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ffffff;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            background-color: #fbff00;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-container button:hover {
+            background-color: #d0ff00;
+        }
+
+        .success-message {
+            display: none;
+            color: #d0ff00;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Cadastre-se</h2>
+        <form id="contactForm" action="http://localhost:3000/register" method="POST">
+            <input type="text" id="name" name="name" placeholder="Seu nome" required>
+            <input type="tel" id="phone" name="phone" placeholder="Seu telefone (com DDD)" required>
+            <button type="submit">Enviar</button>
+        </form>
+        
+        <p class="success-message" id="successMessage">✅ Cadastro enviado com sucesso!</p>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+
+            if (name && phone) {
+                const whatsappLink = `https://api.whatsapp.com/send?phone=5541996989493&text=Olá, Olá, Eduardo! Tudo bem? Me interesso em adquirir meu próprio imóvel!`;
+                window.open(whatsappLink, '_blank');
+
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        });
+    </script>
+</body>
+</html>
